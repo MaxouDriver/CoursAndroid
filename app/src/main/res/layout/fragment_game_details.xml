@@ -1,43 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".game.GameDetailsFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".game.GameDetailsFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:layout_margin="15dp"
-        android:layout_alignParentTop="true"
-        android:text="@string/hello_blank_fragment" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_below="@id/nameTextView"
-        android:layout_centerHorizontal="true"
-        android:text="@string/hello_blank_fragment" />
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"
+                android:textSize="24sp"
+                android:layout_margin="15dp"
+                android:layout_alignParentTop="true"
+                android:text="@string/hello_blank_fragment" />
 
-    <TextView
-        android:id="@+id/detailsTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imageView"
-        android:layout_margin="15dp"
-        android:text="@string/see_link" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_below="@id/nameTextView"
+                android:layout_centerHorizontal="true"
+                android:text="@string/hello_blank_fragment" />
 
-    <Button
-        android:id="@+id/linkButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detailsTextView"
-        android:layout_alignParentEnd="true"
-        android:text="@string/see_link" />
+            <TextView
+                android:id="@+id/detailsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView"
+                android:textColor="@color/colorText"
+                android:layout_margin="15dp"
+                android:text="@string/see_link" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/linkButton"
+                android:background="@drawable/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detailsTextView"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorText"
+                android:text="@string/see_link" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.animation.AccelerateInterpolator
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -67,6 +69,14 @@ class GameFragment : Fragment() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         list.layoutManager = layoutManager
         list.adapter = gameAdapter
+
+        list.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                //title.animate().translationY(-title.getHeight().toFloat()).setInterpolator(AccelerateInterpolator(2f))
+
+            }
+        })
 
         swiperefresh.setOnRefreshListener {
             games.clear()
