@@ -59,12 +59,13 @@ class MainActivity : AppCompatActivity(), GameFragment.OnListFragmentInteraction
 
         val pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         cpt = pref.getInt(PREF_NAME, 0)
-        Log.e("MAin", cpt.toString())
+        Log.e("getInt", cpt.toString())
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         val pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         pref.edit().putInt(PREF_NAME, cpt).apply()
+        Log.e("putInt", cpt.toString())
     }
 }

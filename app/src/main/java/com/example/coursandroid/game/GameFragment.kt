@@ -16,6 +16,8 @@ import com.android.volley.toolbox.Volley
 import com.example.coursandroid.R
 
 import com.example.coursandroid.game.GameContent.GameItem
+import kotlinx.android.synthetic.main.fragment_game_details.*
+import kotlinx.android.synthetic.main.fragment_game_list.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -51,18 +53,25 @@ class GameFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_list, container, false)
 
+
         gameAdapter = MyGameRecyclerViewAdapter(games, listener)
 
         fetchData()
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            val layoutManager = LinearLayoutManager(context)
-            layoutManager.orientation = LinearLayoutManager.VERTICAL
-            view.layoutManager = layoutManager
-            view.adapter = gameAdapter
-        }
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        list.layoutManager = layoutManager
+        list.adapter = gameAdapter
+
+        swiperefresh.setOnRefreshListener {
+            games.clear()
+            fetchData()
+        }
     }
 
     private fun fetchData() {
@@ -81,6 +90,8 @@ class GameFragment : Fragment() {
                     games.clear()
                     games.addAll(newGames)
                     gameAdapter.notifyDataSetChanged()
+
+                    swiperefresh.isRefreshing = false
                 }
 
             } , Response.ErrorListener { error -> Log.e("MAin", error.localizedMessage) })
