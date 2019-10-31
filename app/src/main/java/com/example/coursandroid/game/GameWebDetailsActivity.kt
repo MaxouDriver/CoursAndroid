@@ -2,7 +2,6 @@ package com.example.coursandroid.game
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebViewClient
 import com.example.coursandroid.R
 import kotlinx.android.synthetic.main.activity_game_web_details.*
@@ -16,9 +15,7 @@ class GameWebDetailsActivity : AppCompatActivity() {
 
         link = intent.getStringExtra("link")
 
-        Log.e("GameWebDetail", link);
-
-        webView.setWebViewClient(WebViewClient())
+        webView.webViewClient = WebViewClient()
         webView.loadUrl(link)
     }
 }

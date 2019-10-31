@@ -14,9 +14,10 @@ import com.example.coursandroid.game.GameContent.GameItem
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.fragment_game.view.*
+import kotlin.random.Random
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
+ * [RecyclerView.Adapter] that can display a [GameItem] and makes a call to the
  * specified [OnListFragmentInteractionListener].
  * TODO: Replace the implementation with code for your data type.
  */
@@ -42,7 +43,16 @@ class MyGameRecyclerViewAdapter(private val mValues: List<GameItem>, private val
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mNameView.text = item.content.toString()
+        holder.mNameView.text = item.content
+
+        val difficulty = when(Random.nextInt(1, 3)) {
+            1 -> "Easy"
+            2 -> "Medium"
+            3 -> "Hard"
+            else -> "NA"
+        }
+        holder.mDifficulty.text = difficulty
+
         picasso.load(item.image)
             .into(holder.mImageView)
 
@@ -56,6 +66,7 @@ class MyGameRecyclerViewAdapter(private val mValues: List<GameItem>, private val
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mNameView: TextView = mView.name
+        val mDifficulty: TextView = mView.difficulty
         val mImageView: ImageView = mView.image
 
         override fun toString(): String {

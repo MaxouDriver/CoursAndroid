@@ -91,7 +91,7 @@ class GameFragment : Fragment() {
                 if (response != null) {
                     val responseSize = response.length()
 
-                    var newGames: MutableList<GameContent.GameItem> = arrayListOf<GameContent.GameItem>()
+                    val newGames: MutableList<GameContent.GameItem> = arrayListOf<GameContent.GameItem>()
 
                     for (i in 0 until responseSize) {
                         val myJsonObject = response.get(i) as JSONObject

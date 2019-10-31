@@ -39,7 +39,8 @@
                 android:layout_height="250dp"
                 android:layout_below="@id/nameTextView"
                 android:layout_centerHorizontal="true"
-                android:text="@string/hello_blank_fragment" />
+                android:text="@string/hello_blank_fragment"
+                android:contentDescription="@string/game_image" />
 
             <TextView
                 android:id="@+id/detailsTextView"
@@ -57,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/detailsTextView"
                 android:layout_alignParentEnd="true"
-                android:textColor="@color/colorText"
+                android:textColor="@android:color/white"
                 android:text="@string/see_link" />
 
         </RelativeLayout>
