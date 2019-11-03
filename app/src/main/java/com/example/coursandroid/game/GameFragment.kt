@@ -9,16 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
-import android.view.animation.AccelerateInterpolator
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.coursandroid.R
 
-import com.example.coursandroid.game.GameContent.GameItem
-import kotlinx.android.synthetic.main.fragment_game_details.*
+import com.example.coursandroid.game.GameItem
 import kotlinx.android.synthetic.main.fragment_game_list.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -37,7 +34,7 @@ class GameFragment : Fragment() {
 
     private var listener: OnListFragmentInteractionListener? = null
 
-    private var games: MutableList<GameItem> = GameContent.ITEMS
+    private var games: MutableList<GameItem> = mutableListOf()
 
     private lateinit var gameAdapter: RecyclerView.Adapter<MyGameRecyclerViewAdapter.ViewHolder>
 
@@ -70,14 +67,7 @@ class GameFragment : Fragment() {
         list.layoutManager = layoutManager
         list.adapter = gameAdapter
 
-        list.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                //title.animate().translationY(-title.getHeight().toFloat()).setInterpolator(AccelerateInterpolator(2f))
-
-            }
-        })
-
+        // On swipe, erase the loacl list and fetch a new one
         swiperefresh.setOnRefreshListener {
             games.clear()
             fetchData()
@@ -90,12 +80,12 @@ class GameFragment : Fragment() {
             Response.Listener<JSONArray> { response: JSONArray? ->
                 if (response != null) {
                     val responseSize = response.length()
-
-                    val newGames: MutableList<GameContent.GameItem> = arrayListOf<GameContent.GameItem>()
+                    // Create a list of game with the fetched data
+                    val newGames: MutableList<GameItem> = arrayListOf<GameItem>()
 
                     for (i in 0 until responseSize) {
                         val myJsonObject = response.get(i) as JSONObject
-                        newGames.add(GameContent.GameItem(i, myJsonObject.getString("name"), myJsonObject.getString("description"), myJsonObject.getString("img"), myJsonObject.getString("link")))
+                        newGames.add(GameItem(i, myJsonObject.getString("name"), myJsonObject.getString("description"), myJsonObject.getString("img"), myJsonObject.getString("link")))
                     }
                     games.clear()
                     games.addAll(newGames)
@@ -104,7 +94,7 @@ class GameFragment : Fragment() {
                     swiperefresh.isRefreshing = false
                 }
 
-            } , Response.ErrorListener { error -> Log.e("MAin", error.localizedMessage) })
+            } , Response.ErrorListener { error -> Log.e("Main", error.localizedMessage) })
 
         queue.add(request)
     }

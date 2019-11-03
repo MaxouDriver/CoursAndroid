@@ -12,7 +12,7 @@ class GameWebDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_web_details)
-
+        // Load the correct link into the webview
         link = intent.getStringExtra("link")
 
         webView.webViewClient = WebViewClient()

@@ -10,7 +10,6 @@ import com.example.coursandroid.R
 
 
 import com.example.coursandroid.game.GameFragment.OnListFragmentInteractionListener
-import com.example.coursandroid.game.GameContent.GameItem
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.fragment_game.view.*
@@ -45,6 +44,7 @@ class MyGameRecyclerViewAdapter(private val mValues: List<GameItem>, private val
         val item = mValues[position]
         holder.mNameView.text = item.content
 
+        // Set a random difficulty
         val difficulty = when(Random.nextInt(1, 3)) {
             1 -> "Easy"
             2 -> "Medium"
@@ -53,6 +53,7 @@ class MyGameRecyclerViewAdapter(private val mValues: List<GameItem>, private val
         }
         holder.mDifficulty.text = difficulty
 
+        // Load image
         picasso.load(item.image)
             .into(holder.mImageView)
 
